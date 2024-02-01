@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start ()
     {
-        m_Rigidbody = GetComponent<Rigidbody> ();
+        m_Rigidbody = GetComponent<Rigidbody>();
         Physics.gravity *= GravityModifier;
     }
     
@@ -44,6 +44,16 @@ public class PlayerMovement : MonoBehaviour
         {
             _playerRb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
             IsOnGround = false;
+        }
+         _playerRb.AddForce(movement * movespeed);
+        
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        IsOnGround = true;
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            IsOnGround = true;
         }
     }
 }
