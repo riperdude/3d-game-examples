@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float JumpForce = 10f;
     public float GravityModifier = 1f;
     public bool IsOnGround = true;
+     private Vector3 m_Movement;
     public float moveSpeed = 5;
     private Rigidbody _playerRb;
     // Start is called before the first frame update
@@ -29,11 +30,11 @@ public class PlayerController : MonoBehaviour
 
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-         Vector3 movement = new Vector3(horizontalInput, 0.0f, verticalInput);
+        
 
-        _playerRb.AddForce(movement * moveSpeed);
+        _playerRb.AddForce(m_Movement * moveSpeed);
 
-        _playerRb.AddForce(movement);
+        _playerRb.AddForce(m_Movement);
     }
 
     private void OnCollisionEnter(Collision collision)

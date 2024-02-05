@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class CameraFollow : MonoBehaviour
 
-public transfrom objectToFollow;
-
-private Vector3 _offset;
-
+public class CameraControler : MonoBehaviour
 {
+
+    public GameObject Target;
+
+    private Vector3 _offset;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _offset = transform.position-Target.transform.position;
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
-        transform.position = objectToFollow.position + _offset;
+        transform.position = Target.transform.position + _offset;
     }
 }
