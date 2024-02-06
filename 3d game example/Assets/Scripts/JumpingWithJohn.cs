@@ -32,9 +32,9 @@ public class JumpingWithJohn : MonoBehaviour
             _playerRb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
             IsOnGround = false;
         }
-        if(transform.position < outOfBounds)
+        if(transform.position.y < outOfBounds)
         {
-
+            transform.position = _startingPosition;
         }
     }
 
