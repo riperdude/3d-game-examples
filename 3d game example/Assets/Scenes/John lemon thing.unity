@@ -704,14 +704,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de829dd8f7db145ffafd22ec53e61e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnSpeed: 7
+  moveSpeed: 1
   JumpForce: 15
   GravityModifier: 3
-  IsOnGround: 1
-  checkointAreaObject: {fileID: 1720965724}
-  isAtCheckpoint: 0
-  turnSpeed: 7
   outOfBounds: -10
-  movespeed: 8
+  IsOnGround: 1
+  isAtCheckpoint: 0
+  checkpointAreaObject: {fileID: 1459603411}
+  finishAreaObject: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1441,6 +1442,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 166797694}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1459603411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1459603413}
+  - component: {fileID: 1459603412}
+  m_Layer: 0
+  m_Name: Checkpoint Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1459603412
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459603411}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 4, z: 11}
+  m_Center: {x: -2.5, y: 4.5, z: 1}
+--- !u!4 &1459603413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459603411}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.743058, y: 2.0821407, z: 51.689262}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1550405611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,7 +1718,7 @@ GameObject:
   - component: {fileID: 1720965726}
   - component: {fileID: 1720965725}
   m_Layer: 0
-  m_Name: Checkpoint
+  m_Name: Checkpoint plat
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2205,3 +2259,4 @@ SceneRoots:
   - {fileID: 166797694}
   - {fileID: 1856494938}
   - {fileID: 1720965724}
+  - {fileID: 1459603413}
