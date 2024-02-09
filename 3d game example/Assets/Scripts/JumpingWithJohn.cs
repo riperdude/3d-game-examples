@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class JumpingWithJohn : MonoBehaviour
 {
+    public int score = 0;
     public float turnSpeed = 20;
     public float moveSpeed = 1f;
     public float JumpForce = 10f;
     public float GravityModifier = 1f;
-    public float outOfBounds = -10f;
+    public float outOfBounds = -40f;
     public bool IsOnGround = true;
     public bool isAtCheckpoint = false;
     public GameObject checkpointAreaObject;
@@ -20,6 +21,7 @@ public class JumpingWithJohn : MonoBehaviour
     private Vector3 _defaultGravity = new Vector3(0f, -9.81f, 0f);
     private Vector3 _startingPostion;
     private Vector3 _checkpointPosition;
+    private GameObject[] _collectibles;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,7 @@ public class JumpingWithJohn : MonoBehaviour
         Physics.gravity *= GravityModifier;
         //Debug.Log(Physics.gravity);
         _startingPostion = transform.position;
+        _collectibles = GameObject.FindGameObjectsWithTag("Collectible-Return");
     }
 
     void Update()
@@ -45,10 +48,12 @@ public class JumpingWithJohn : MonoBehaviour
         {
             if(isAtCheckpoint)
             {
+                ReturningCollectibles();
                 transform.position = _checkpointPosition;
             }
             else
             {
+                ReturningCollectibles();
                 transform.position = _startingPostion;
             }
             
@@ -89,6 +94,21 @@ public class JumpingWithJohn : MonoBehaviour
         {
             IsOnGround = true;
         }
+
+        if (collision.gameObject.CompareTag("Spinner"))
+        {
+            if(isAtCheckpoint)
+            {
+                ReturningCollectibles();
+                transform.position = checkpointAreaObject.transform.position;
+                
+            }
+            else
+            {
+                ReturningCollectibles();
+                transform.position = _startingPostion;
+            }
+        }
         
     }
     void OnTriggerEnter(Collider other)
@@ -96,15 +116,35 @@ public class JumpingWithJohn : MonoBehaviour
         if(other.gameObject == checkpointAreaObject)
         {
             isAtCheckpoint = true;
-            //Debug.Log(_startingPostion);
             _checkpointPosition = checkpointAreaObject.transform.position;
-            //Debug.Log(_startingPostion);
         }
 
         if(other.gameObject == finishAreaObject)
         {
             isAtCheckpoint = false;
+            ReturningCollectibles();
             transform.position = _startingPostion;
+        }
+
+        if(other.gameObject.CompareTag("Collectible-Destroy"))
+        {
+            score++;
+            Destroy(other.gameObject);
+        }
+
+        if(other.gameObject.CompareTag("Collectible-Return"))
+        {
+            score++;
+            other.gameObject.GetComponent<Collectibles>().HideCollectibles();
+        }
+    }
+
+    void ReturningCollectibles()
+    {
+        for(int i = 0; i < _collectibles.Length; i++)
+        {
+            _collectibles[i].SetActive(true);
+            _collectibles[i].GetComponent<Collectibles>().ReturnCollectibles();
         }
     }
 }
